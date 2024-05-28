@@ -559,3 +559,54 @@ export const camelCaseKeys= (obj: {[x: string]: string | number}):{[x: string]: 
     }
     return camelCasedObj; // Return the new object with camelCased keys.
 }  
+
+/**
+ * Formats a duration given in seconds into a human-readable string.
+ *
+ * @param {number | null} totalSeconds - The total duration in seconds. If null, an empty string is returned.
+ * @returns {string} - A formatted duration string in the format "Xhr Ymin Zsec",
+ *                     where X is hours, Y is minutes, and Z is seconds. If the duration
+ *                     is less than an hour, the hour part is omitted; similarly for minutes
+ *                     and seconds. If `totalSeconds` is null, returns an empty string.
+ *
+ * @example
+ * formatDuration(3661); // returns "1hr 1min 1sec"
+ * formatDuration(45);   // returns "45sec"
+ * formatDuration(null); // returns ""
+ */
+export const formatDuration = (totalSeconds: number | null): string => {
+    // If totalSeconds is null, handle it by returning an empty string or a default value
+    if (totalSeconds === null) {
+        return ""
+    }
+
+    // Calculate the number of hours by dividing the total seconds by 3600 (the number of seconds in an hour)
+    const hours = Math.floor(totalSeconds / 3600)
+
+
+    // Calculate the number of minutes by first getting the remainder of the seconds divided by 3600 
+    // (to get the leftover seconds after extracting hours), and then dividing by 60 (the number of seconds in a minute)
+    const minutes = Math.floor((totalSeconds % 3600) / 60)
+
+    // Calculate the remaining seconds after extracting hours and minutes
+    const seconds = totalSeconds % 60
+
+    // Initialize an empty string to build the formatted time
+    let formattedTime = ""
+
+    // Append the hours to the formatted string if there are any hours
+    if (hours > 0) {
+        formattedTime += `${hours}hr `
+    }
+    // Append the minutes to the formatted string if there are any minutes
+    if (minutes > 0) {
+        formattedTime += `${minutes}min `
+    }
+    // Append the seconds to the formatted string if there are any seconds
+    if (seconds > 0) {
+        formattedTime += `${seconds}sec`
+    }
+
+    // Return the formatted time string, trimmed to remove any trailing spaces
+    return formattedTime.trim()
+}
