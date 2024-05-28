@@ -61,8 +61,8 @@ export declare const getCurrentDate: () => string;
  * @returns {string} - A formatted string representing the date and time.
  */
 export declare const getUnixConvertedDateTime: ({ timestamp, dateObj }?: {
-    timestamp?: number | null | undefined;
-    dateObj?: Date | null | undefined;
+    timestamp?: number | null;
+    dateObj?: Date | null;
 }) => string;
 /**
  * Converts hours to twelve hour format.
@@ -252,3 +252,32 @@ export declare const getDayFromDate: (dateString: string) => string;
  * @returns {Date} - The parsed Date object, or null if the input is not a valid date.
  */
 export declare const strToDate: (dateString: string, format: string) => Date | null;
+/**
+* Converts the keys of an object from snake_case to camelCase.
+* @param {{ [x: string]: string | number}} obj - The object whose keys should be camelCased.
+* @example
+* const snakeCaseData = { first_name: "John", last_name: "Doe"};
+* const camelCaseData = camelCaseKeys(snakeCaseData);
+* returns camelCaseData as { firstName: "John", lastName: "Doe"}
+* @returns {{ [x: string]: string | number}} - A new object with camelCased keys.
+*/
+export declare const camelCaseKeys: (obj: {
+    [x: string]: string | number;
+}) => {
+    [x: string]: string | number;
+};
+/**
+ * Formats a duration given in seconds into a human-readable string.
+ *
+ * @param {number | null} totalSeconds - The total duration in seconds. If null, an empty string is returned.
+ * @returns {string} - A formatted duration string in the format "Xhr Ymin Zsec",
+ *                     where X is hours, Y is minutes, and Z is seconds. If the duration
+ *                     is less than an hour, the hour part is omitted; similarly for minutes
+ *                     and seconds. If `totalSeconds` is null, returns an empty string.
+ *
+ * @example
+ * formatDuration(3661); // returns "1hr 1min 1sec"
+ * formatDuration(45);   // returns "45sec"
+ * formatDuration(null); // returns ""
+ */
+export declare const formatDuration: (totalSeconds: number | null) => string;

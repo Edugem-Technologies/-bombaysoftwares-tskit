@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.strToDate = exports.getDayFromDate = exports.millisToMinutesAndSeconds = exports.getDateMonth = exports.getDateFormat = exports.formatTimestamp = exports.getTextFromHtml = exports.handleCopyToClipboard = exports.getRandomColor = exports.isSetObject = exports.getLocalDateHHMM = exports.getLocalDate = exports.isValidJsonData = exports.getDateTimeFromTimestamp = exports.dateFormatHHMM = exports.dateFormat = exports.dateAndTimeFormat = exports.getUnixConvertedIsoString = exports.getTwodigitFormat = exports.tweleveHourFormat = exports.getUnixConvertedDateTime = exports.getCurrentDate = exports.getCurrentTimestamp = exports.getCurrentDateTime = exports.evalBooleanValue = exports.isSet = void 0;
+exports.formatDuration = exports.camelCaseKeys = exports.strToDate = exports.getDayFromDate = exports.millisToMinutesAndSeconds = exports.getDateMonth = exports.getDateFormat = exports.formatTimestamp = exports.getTextFromHtml = exports.handleCopyToClipboard = exports.getRandomColor = exports.isSetObject = exports.getLocalDateHHMM = exports.getLocalDate = exports.isValidJsonData = exports.getDateTimeFromTimestamp = exports.dateFormatHHMM = exports.dateFormat = exports.dateAndTimeFormat = exports.getUnixConvertedIsoString = exports.getTwodigitFormat = exports.tweleveHourFormat = exports.getUnixConvertedDateTime = exports.getCurrentDate = exports.getCurrentTimestamp = exports.getCurrentDateTime = exports.evalBooleanValue = exports.isSet = void 0;
 var constants_1 = require("./constants");
 /**
 * Checks if the value provided is none of this - null, undefined, empty string, "undefined", empty array as string
@@ -591,3 +591,67 @@ var strToDate = function (dateString, format) {
     return new Date(year, month, day); // Construct a new Date object with the parsed year, month, and day
 };
 exports.strToDate = strToDate;
+/**
+* Converts the keys of an object from snake_case to camelCase.
+* @param {{ [x: string]: string | number}} obj - The object whose keys should be camelCased.
+* @example
+* const snakeCaseData = { first_name: "John", last_name: "Doe"};
+* const camelCaseData = camelCaseKeys(snakeCaseData);
+* returns camelCaseData as { firstName: "John", lastName: "Doe"}
+* @returns {{ [x: string]: string | number}} - A new object with camelCased keys.
+*/
+var camelCaseKeys = function (obj) {
+    var camelCasedObj = {}; // Create an empty object to store the result with camelCased keys.
+    for (var key in obj) { // Iterate through each property (key-value pair) in the input object.
+        if (obj.hasOwnProperty(key)) { // Check if the property is a direct own property of the object (not inherited).
+            var camelCasedKey = key.replace(/_([a-z])/g, function (_, match) { return match.toUpperCase(); }); // Convert the snake_case key to camelCase using regular expression.
+            camelCasedObj[camelCasedKey] = obj[key]; // Add the property to the new object with the camelCased key.
+        }
+    }
+    return camelCasedObj; // Return the new object with camelCased keys.
+};
+exports.camelCaseKeys = camelCaseKeys;
+/**
+ * Formats a duration given in seconds into a human-readable string.
+ *
+ * @param {number | null} totalSeconds - The total duration in seconds. If null, an empty string is returned.
+ * @returns {string} - A formatted duration string in the format "Xhr Ymin Zsec",
+ *                     where X is hours, Y is minutes, and Z is seconds. If the duration
+ *                     is less than an hour, the hour part is omitted; similarly for minutes
+ *                     and seconds. If `totalSeconds` is null, returns an empty string.
+ *
+ * @example
+ * formatDuration(3661); // returns "1hr 1min 1sec"
+ * formatDuration(45);   // returns "45sec"
+ * formatDuration(null); // returns ""
+ */
+var formatDuration = function (totalSeconds) {
+    // If totalSeconds is null, handle it by returning an empty string or a default value
+    if (totalSeconds === null) {
+        return "";
+    }
+    // Calculate the number of hours by dividing the total seconds by 3600 (the number of seconds in an hour)
+    var hours = Math.floor(totalSeconds / 3600);
+    // Calculate the number of minutes by first getting the remainder of the seconds divided by 3600 
+    // (to get the leftover seconds after extracting hours), and then dividing by 60 (the number of seconds in a minute)
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    // Calculate the remaining seconds after extracting hours and minutes
+    var seconds = totalSeconds % 60;
+    // Initialize an empty string to build the formatted time
+    var formattedTime = "";
+    // Append the hours to the formatted string if there are any hours
+    if (hours > 0) {
+        formattedTime += "".concat(hours, "hr ");
+    }
+    // Append the minutes to the formatted string if there are any minutes
+    if (minutes > 0) {
+        formattedTime += "".concat(minutes, "min ");
+    }
+    // Append the seconds to the formatted string if there are any seconds
+    if (seconds > 0) {
+        formattedTime += "".concat(seconds, "sec");
+    }
+    // Return the formatted time string, trimmed to remove any trailing spaces
+    return formattedTime.trim();
+};
+exports.formatDuration = formatDuration;
