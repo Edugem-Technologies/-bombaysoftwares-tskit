@@ -1,6 +1,6 @@
 {
   "name": "@bombaysoftwares/tskit",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "The @bombaysoftwares/tskit package provides a set of utility functions for working with dates and timestamps in JavaScript. These functions simplify common tasks such as date formatting, timestamp conversion, and JSON validation.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
