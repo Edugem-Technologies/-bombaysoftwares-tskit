@@ -1,11 +1,10 @@
 name: Package Version-Bump Workflow
 
-# Trigger the workflow when a pull request is opened in the 'main' branch
+# Trigger the workflow when a pull request is opened in the 'prod' branch
 on:
   pull_request:
-    types: [opened]
     branches:
-      - 'main'
+      - 'prod'
 
 # Specify permissions for the workflow
 # This grants write access to the contents of the repository

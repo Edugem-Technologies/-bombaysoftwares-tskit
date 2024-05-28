@@ -1,12 +1,12 @@
 name: NPM Package Publishing Workflow
 
-# Trigger the workflow when a pull request is closed in the 'main' branch
+# Trigger the workflow when a pull request is closed in the 'prod' branch
 on:
   pull_request:
     types:
       - closed
     branches:
-      - 'main'
+      - 'prod'
 
 jobs:
   publish-npm:
