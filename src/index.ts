@@ -1,4 +1,4 @@
-import { MONTH } from "./constants";
+import { FULL_MONTH_NAMES, MONTH } from "./constants";
 
 /**
 * Checks if the value provided is none of this - null, undefined, empty string, "undefined", empty array as string
@@ -143,7 +143,7 @@ export const tweleveHourFormat = (hours: number): string => {
  * getTwodigitFormat(10); returns 10
  * @returns {string | number} - The formatted number as a string if less than 10, otherwise the original number.
  */
-export const getTwodigitFormat = (data: number): string | number | null=> {
+export const getTwodigitFormat = (data: number): string | number | null => {
     // Check if the data is greater than 9
     // If true, return the data as it is
     // If false, add a leading zero to the data and return it as a string
@@ -472,93 +472,93 @@ export const millisToMinutesAndSeconds = (millis: number) => {
 export const getDayFromDate = (dateString: string): string => {
     const dateFormats: string[] = ["DD-MMM-YYYY", "DD/MM/YYYY", "DD/MMM/YYYY"];
     let date: Date | null = null;
-  
+
     for (let format of dateFormats) {
-      date = strToDate(dateString, format);
-      if (date) break;
+        date = strToDate(dateString, format);
+        if (date) break;
     }
-  
+
     if (!date) {
-      return "Invalid date format";
+        return "Invalid date format";
     }
-  
+
     const days: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const dayOfWeek: number = date.getDay();
     return days[dayOfWeek];
-  }
-  
-  /**
-   * Parses the input date string based on the specified format and returns a Date object.
-   * @param {string} dateString - The input date string.
-   * @param {string} format - The format string specifying the expected date format.
-   * @example
-   * const dateStringFormatOne = "07/Jul/2023"
-   * const format = "DD/MMM/YYYY";
-   * strToDate(dateString, format); returns 2023-07-07T00:00:00.000Z
-   * @returns {Date} - The parsed Date object, or null if the input is not a valid date.
-   */
-  export const strToDate = (dateString: string, format: string): Date | null => {
+}
+
+/**
+ * Parses the input date string based on the specified format and returns a Date object.
+ * @param {string} dateString - The input date string.
+ * @param {string} format - The format string specifying the expected date format.
+ * @example
+ * const dateStringFormatOne = "07/Jul/2023"
+ * const format = "DD/MMM/YYYY";
+ * strToDate(dateString, format); returns 2023-07-07T00:00:00.000Z
+ * @returns {Date} - The parsed Date object, or null if the input is not a valid date.
+ */
+export const strToDate = (dateString: string, format: string): Date | null => {
     const parts: string[] = dateString.split(/[\/-]/);
     const formatParts: string[] = format.split(/[-/]/);
     const dateObj: { day?: number; month?: number; year?: number } = {};
-  
-    for (let i = 0; i < formatParts.length; i++) {
-      const formatPart: string = formatParts[i].toUpperCase();
-      const part: string = parts[i];
-  
-      if (formatPart === "DD") { 
-        dateObj.day = parseInt(part, 10); // Extract the day value and assign it to the date object
-      } else if (formatPart === "MM") {
-        dateObj.month = parseInt(part, 10) - 1; // Extract the month value and assign it to the date object
-      } else if (formatPart === "MMM") {
-        const monthMap: { [key: string]: number } = {
-          'JAN': 0,
-          'FEB': 1,
-          'MAR': 2,
-          'APR': 3,
-          'MAY': 4,
-          'JUN': 5,
-          'JUL': 6,
-          'AUG': 7,
-          'SEP': 8,
-          'OCT': 9,
-          'NOV': 10,
-          'DEC': 11
-        };
-        dateObj.month = monthMap[part.toUpperCase()]; // Map the three-letter month abbreviation to a numeric value and assign it to the date object
-      } else if (formatPart === "YYYY") {
-        dateObj.year = parseInt(part, 10); // Extract the year value and assign it to the date object
-      }
-    }
-  
-    const { day, month, year } = dateObj;
-  
-    if (isNaN(day!) || isNaN(month!) || isNaN(year!)) {
-      return null; // Return null if any of the date components are not valid numbers
-    }
-  
-    return new Date(year!, month!, day!); // Construct a new Date object with the parsed year, month, and day
-  }
 
- /**
- * Converts the keys of an object from snake_case to camelCase.
- * @param {{ [x: string]: string | number}} obj - The object whose keys should be camelCased.
- * @example
- * const snakeCaseData = { first_name: "John", last_name: "Doe"};
- * const camelCaseData = camelCaseKeys(snakeCaseData);
- * returns camelCaseData as { firstName: "John", lastName: "Doe"}
- * @returns {{ [x: string]: string | number}} - A new object with camelCased keys.
- */
-export const camelCaseKeys= (obj: {[x: string]: string | number}):{[x: string]: string | number} => {
-    const camelCasedObj:{ [x: string]: string | number} = {};// Create an empty object to store the result with camelCased keys.
+    for (let i = 0; i < formatParts.length; i++) {
+        const formatPart: string = formatParts[i].toUpperCase();
+        const part: string = parts[i];
+
+        if (formatPart === "DD") {
+            dateObj.day = parseInt(part, 10); // Extract the day value and assign it to the date object
+        } else if (formatPart === "MM") {
+            dateObj.month = parseInt(part, 10) - 1; // Extract the month value and assign it to the date object
+        } else if (formatPart === "MMM") {
+            const monthMap: { [key: string]: number } = {
+                'JAN': 0,
+                'FEB': 1,
+                'MAR': 2,
+                'APR': 3,
+                'MAY': 4,
+                'JUN': 5,
+                'JUL': 6,
+                'AUG': 7,
+                'SEP': 8,
+                'OCT': 9,
+                'NOV': 10,
+                'DEC': 11
+            };
+            dateObj.month = monthMap[part.toUpperCase()]; // Map the three-letter month abbreviation to a numeric value and assign it to the date object
+        } else if (formatPart === "YYYY") {
+            dateObj.year = parseInt(part, 10); // Extract the year value and assign it to the date object
+        }
+    }
+
+    const { day, month, year } = dateObj;
+
+    if (isNaN(day!) || isNaN(month!) || isNaN(year!)) {
+        return null; // Return null if any of the date components are not valid numbers
+    }
+
+    return new Date(year!, month!, day!); // Construct a new Date object with the parsed year, month, and day
+}
+
+/**
+* Converts the keys of an object from snake_case to camelCase.
+* @param {{ [x: string]: string | number}} obj - The object whose keys should be camelCased.
+* @example
+* const snakeCaseData = { first_name: "John", last_name: "Doe"};
+* const camelCaseData = camelCaseKeys(snakeCaseData);
+* returns camelCaseData as { firstName: "John", lastName: "Doe"}
+* @returns {{ [x: string]: string | number}} - A new object with camelCased keys.
+*/
+export const camelCaseKeys = (obj: { [x: string]: string | number }): { [x: string]: string | number } => {
+    const camelCasedObj: { [x: string]: string | number } = {};// Create an empty object to store the result with camelCased keys.
     for (const key in obj) {  // Iterate through each property (key-value pair) in the input object.
-      if (obj.hasOwnProperty(key)) {  // Check if the property is a direct own property of the object (not inherited).
-        const camelCasedKey = key.replace(/_([a-z])/g, (_, match) => match.toUpperCase()); // Convert the snake_case key to camelCase using regular expression.
-        camelCasedObj[camelCasedKey] = obj[key];    // Add the property to the new object with the camelCased key.
-      }
+        if (obj.hasOwnProperty(key)) {  // Check if the property is a direct own property of the object (not inherited).
+            const camelCasedKey = key.replace(/_([a-z])/g, (_, match) => match.toUpperCase()); // Convert the snake_case key to camelCase using regular expression.
+            camelCasedObj[camelCasedKey] = obj[key];    // Add the property to the new object with the camelCased key.
+        }
     }
     return camelCasedObj; // Return the new object with camelCased keys.
-}  
+}
 
 /**
  * Formats a duration given in seconds into a human-readable string.
@@ -609,4 +609,28 @@ export const formatDuration = (totalSeconds: number | null): string => {
 
     // Return the formatted time string, trimmed to remove any trailing spaces
     return formattedTime.trim()
+}
+
+/**
+ * Converts an ISO 8601 date string to a human-readable format.
+ * @param isoDateString - The ISO 8601 date string (e.g., "2019-08-24T14:15:22Z").
+ * @returns A formatted date string (e.g., "01 November 2022").
+ */
+export const formatISODateStringToReadableDate = (isoDateString: string): string => {
+    try {
+        if (isoDateString) {
+            const date = new Date(isoDateString)
+            // Get the day, month, and year
+            const day = date.getUTCDate().toString().padStart(2, "0")
+            const month = FULL_MONTH_NAMES[date.getUTCMonth()]
+            const year = date.getUTCFullYear()
+    
+            // Format and return the string
+            return `${day} ${month} ${year}`
+        } else {
+            return ""
+        }
+    } catch (error) {
+        return ""
+    }
 }
