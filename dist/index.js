@@ -661,12 +661,22 @@ exports.formatDuration = formatDuration;
  * @returns A formatted date string (e.g., "01 November 2022").
  */
 var formatISODateStringToReadableDate = function (isoDateString) {
-    var date = new Date(isoDateString);
-    // Get the day, month, and year
-    var day = date.getUTCDate().toString().padStart(2, "0");
-    var month = constants_1.FULL_MONTH_NAMES[date.getUTCMonth()];
-    var year = date.getUTCFullYear();
-    // Format and return the string
-    return "".concat(day, " ").concat(month, " ").concat(year);
+    try {
+        if (isoDateString) {
+            var date = new Date(isoDateString);
+            // Get the day, month, and year
+            var day = date.getUTCDate().toString().padStart(2, "0");
+            var month = constants_1.FULL_MONTH_NAMES[date.getUTCMonth()];
+            var year = date.getUTCFullYear();
+            // Format and return the string
+            return "".concat(day, " ").concat(month, " ").concat(year);
+        }
+        else {
+            return "";
+        }
+    }
+    catch (error) {
+        return "";
+    }
 };
 exports.formatISODateStringToReadableDate = formatISODateStringToReadableDate;
