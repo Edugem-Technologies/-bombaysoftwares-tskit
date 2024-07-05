@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatDuration = exports.camelCaseKeys = exports.strToDate = exports.getDayFromDate = exports.millisToMinutesAndSeconds = exports.getDateMonth = exports.getDateFormat = exports.formatTimestamp = exports.getTextFromHtml = exports.handleCopyToClipboard = exports.getRandomColor = exports.isSetObject = exports.getLocalDateHHMM = exports.getLocalDate = exports.isValidJsonData = exports.getDateTimeFromTimestamp = exports.dateFormatHHMM = exports.dateFormat = exports.dateAndTimeFormat = exports.getUnixConvertedIsoString = exports.getTwodigitFormat = exports.tweleveHourFormat = exports.getUnixConvertedDateTime = exports.getCurrentDate = exports.getCurrentTimestamp = exports.getCurrentDateTime = exports.evalBooleanValue = exports.isSet = void 0;
+exports.formatISODateStringToReadableDate = exports.formatDuration = exports.camelCaseKeys = exports.strToDate = exports.getDayFromDate = exports.millisToMinutesAndSeconds = exports.getDateMonth = exports.getDateFormat = exports.formatTimestamp = exports.getTextFromHtml = exports.handleCopyToClipboard = exports.getRandomColor = exports.isSetObject = exports.getLocalDateHHMM = exports.getLocalDate = exports.isValidJsonData = exports.getDateTimeFromTimestamp = exports.dateFormatHHMM = exports.dateFormat = exports.dateAndTimeFormat = exports.getUnixConvertedIsoString = exports.getTwodigitFormat = exports.tweleveHourFormat = exports.getUnixConvertedDateTime = exports.getCurrentDate = exports.getCurrentTimestamp = exports.getCurrentDateTime = exports.evalBooleanValue = exports.isSet = void 0;
 var constants_1 = require("./constants");
 /**
 * Checks if the value provided is none of this - null, undefined, empty string, "undefined", empty array as string
@@ -655,3 +655,18 @@ var formatDuration = function (totalSeconds) {
     return formattedTime.trim();
 };
 exports.formatDuration = formatDuration;
+/**
+ * Converts an ISO 8601 date string to a human-readable format.
+ * @param isoDateString - The ISO 8601 date string (e.g., "2019-08-24T14:15:22Z").
+ * @returns A formatted date string (e.g., "01 November 2022").
+ */
+var formatISODateStringToReadableDate = function (isoDateString) {
+    var date = new Date(isoDateString);
+    // Get the day, month, and year
+    var day = date.getUTCDate().toString().padStart(2, "0");
+    var month = constants_1.FULL_MONTH_NAMES[date.getUTCMonth()];
+    var year = date.getUTCFullYear();
+    // Format and return the string
+    return "".concat(day, " ").concat(month, " ").concat(year);
+};
+exports.formatISODateStringToReadableDate = formatISODateStringToReadableDate;
