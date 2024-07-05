@@ -281,3 +281,9 @@ export declare const camelCaseKeys: (obj: {
  * formatDuration(null); // returns ""
  */
 export declare const formatDuration: (totalSeconds: number | null) => string;
+/**
+ * Converts an ISO 8601 date string to a human-readable format.
+ * @param isoDateString - The ISO 8601 date string (e.g., "2019-08-24T14:15:22Z").
+ * @returns A formatted date string (e.g., "01 November 2022").
+ */
+export declare const formatISODateStringToReadableDate: (isoDateString: string) => string;
