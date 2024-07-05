@@ -1,4 +1,4 @@
-import { MONTH } from "./constants";
+import { FULL_MONTH_NAMES, MONTH } from "./constants";
 
 /**
 * Checks if the value provided is none of this - null, undefined, empty string, "undefined", empty array as string
@@ -609,4 +609,21 @@ export const formatDuration = (totalSeconds: number | null): string => {
 
     // Return the formatted time string, trimmed to remove any trailing spaces
     return formattedTime.trim()
+}
+
+/**
+ * Converts an ISO 8601 date string to a human-readable format.
+ * @param isoDateString - The ISO 8601 date string (e.g., "2019-08-24T14:15:22Z").
+ * @returns A formatted date string (e.g., "01 November 2022").
+ */
+export const formatISODateStringToReadableDate = (isoDateString: string): string => {
+    const date = new Date(isoDateString)
+
+    // Get the day, month, and year
+    const day = date.getUTCDate().toString().padStart(2, "0")
+    const month = FULL_MONTH_NAMES[date.getUTCMonth()]
+    const year = date.getUTCFullYear()
+
+    // Format and return the string
+    return `${day} ${month} ${year}`
 }
