@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { isSet, evalBooleanValue, tweleveHourFormat, getTwodigitFormat, getUnixConvertedIsoString, isSetObject, getTextFromHtml, getCurrentTimestamp, getCurrentDate, isValidJsonData, getCurrentDateTime, dateAndTimeFormat, dateFormat, dateFormatHHMM, getDateTimeFromTimestamp, getLocalDate, getLocalDateHHMM, getRandomColor, formatTimestamp, getDateFormat, getDateMonth, millisToMinutesAndSeconds, getUnixConvertedDateTime, getDayFromDate, camelCaseKeys} from '../src/index';
+import { isSet, evalBooleanValue, tweleveHourFormat, getTwodigitFormat, getUnixConvertedIsoString, isSetObject, getTextFromHtml, getCurrentTimestamp, getCurrentDate, isValidJsonData, getCurrentDateTime, dateAndTimeFormat, dateFormat, dateFormatHHMM, getDateTimeFromTimestamp, getLocalDate, getLocalDateHHMM, getRandomColor, formatTimestamp, formatTimestampToDateString, formatTimestampToDateMonthYearString, millisToMinutesAndSeconds, getUnixConvertedDateTime, getDayFromDate, camelCaseKeys} from '../src/index';
 
 describe('isSet', () => {
   it('should return true if the value is set', () => {
@@ -292,22 +292,22 @@ describe('formatTimestamp', () => {
   });
 });
 
-describe('getDateFormat', () => {
+describe('formatTimestampToDateString', () => {
   it('should return the formatted date in IST', () => {
     // Choose a specific timestamp in UTC
     const timestamp = 1624893600; // June 28, 2021 05:30:00 UTC
     const expected = '28/06/2021 '; // Set the expected result based on the chosen timestamp and IST offset
-    const result = getDateFormat(timestamp); // Call the getDateFormat function with the timestamp
+    const result = formatTimestampToDateString(timestamp); // Call the formatTimestampToDateString function with the timestamp
     expect(result).to.equal(expected); // Assert that the result matches the expected value
   });
 });
 
-describe('getDateMonth', () => {
+describe('formatTimestampToDateMonthYearString', () => {
   it('should return the formatted date and month in IST', () => {
     // Choose a specific timestamp in UTC
     const timestamp = 1624893600; // June 28, 2021 05:30:00 UTC
     const expected = '28 Jun, 2021 '; // Set the expected result based on the chosen timestamp and IST offset
-    const result = getDateMonth(timestamp); // Call the getDateMonth function with the timestamp
+    const result = formatTimestampToDateMonthYearString(timestamp); // Call the formatTimestampToDateMonthYearString function with the timestamp
     expect(result).to.equal(expected); // Assert that the result matches the expected value
   });
 });
