@@ -281,3 +281,13 @@ export declare const millisToMinutesAndSeconds: (millis: number) => string;
  * @returns {Date} - The parsed Date object, or null if the input is not a valid date.
  */
 export declare const strToDate: (dateString: string, format: string) => Date | null;
+/**
+ * Checks if the value provided is not null
+ * @param {number} value - The value to be checked.
+ * @example
+ * isSetNumber(1); returns true
+ * @example
+ * isSetNumber(0); returns true
+ * @return {Boolean} - true if the value is not undefined or null, false otherwise.
+ */
+export declare const isSetNumber: (value?: number | null) => boolean;
