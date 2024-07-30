@@ -144,7 +144,7 @@ export const handleCopyToClipboard = async (text: string) => {
  */
 export const getTextFromHtml = (htmlString: string): string => {
     if (isSet(htmlString)) {
-        return htmlString.replace(/(<([^>]+)>)/gi, ""); // Use regular expression to remove HTML tags from the input HTML string
+        return htmlString.replace(/(<([^>]+)>)/gi, "") // Use regular expression to remove HTML tags from the input HTML string
     } else {
         return "" // Return an empty string if the input HTML string is not set
     }
