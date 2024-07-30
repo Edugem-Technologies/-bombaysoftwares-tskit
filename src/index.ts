@@ -144,7 +144,7 @@ export const handleCopyToClipboard = async (text: string) => {
  */
 export const getTextFromHtml = (htmlString: string): string => {
     if (isSet(htmlString)) {
-        return htmlString.replace(/(<([^>]+)>)/gi, "") // Use regular expression to remove HTML tags from the input HTML string
+        return htmlString.replace(/(<([^>]+)>)/gi, ""); // Use regular expression to remove HTML tags from the input HTML string
     } else {
         return "" // Return an empty string if the input HTML string is not set
     }
@@ -656,4 +656,21 @@ export const strToDate = (dateString: string, format: string): Date | null => {
     }
 
     return new Date(year!, month!, day!) // Construct a new Date object with the parsed year, month, and day
+}
+
+/**
+ * Checks if the value provided is not null
+ * @param {number} value - The value to be checked.
+ * @example
+ * isSetNumber(1); returns true
+ * @example
+ * isSetNumber(0); returns true
+ * @return {Boolean} - true if the value is not undefined or null, false otherwise.
+ */
+export const isSetNumber = (value?: number | null): boolean => {
+    // check if the value is provided is not null or undefined.
+    if (value !== null && value !== undefined) {
+        return true
+    }
+    return false
 }
