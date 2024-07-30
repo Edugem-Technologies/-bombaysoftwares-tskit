@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { isSet, evalBooleanValue, tweleveHourFormat, getTwodigitFormat, getUnixConvertedIsoString, isSetObject, getTextFromHtml, getCurrentTimestamp, getCurrentDate, isValidJsonData, getCurrentDateTime, dateAndTimeFormat, dateFormat, dateFormatHHMM, getDateTimeFromTimestamp, getLocalDate, getLocalDateHHMM, getRandomColor, formatTimestamp, formatTimestampToDateString, formatTimestampToDateMonthYearString, millisToMinutesAndSeconds, getUnixConvertedDateTime, getDayFromDate, camelCaseKeys} from '../src/index';
+import { isSet, evalBooleanValue, tweleveHourFormat, getTwodigitFormat, getUnixConvertedIsoString, isSetObject, getTextFromHtml, getCurrentTimestamp, getCurrentDate, isValidJsonData, getCurrentDateTime, dateAndTimeFormat, dateFormat, dateFormatHHMM, getDateTimeFromTimestamp, getLocalDate, getLocalDateHHMM, getRandomColor, formatTimestamp, formatTimestampToDateString, formatTimestampToDateMonthYearString, millisToMinutesAndSeconds, getUnixConvertedDateTime, getDayFromDate, camelCaseKeys, isSetNumber} from '../src/index';
 
 describe('isSet', () => {
   it('should return true if the value is set', () => {
@@ -378,3 +378,14 @@ describe('camelCaseKeys', () => {
     expect(result).to.eql(expected);
   });
 })
+describe('isSetNumber', () => {
+  it('should return true if the value is not undefined or null', () => {
+    expect(isSetNumber(5)).to.be.true;
+    expect(isSetNumber(0)).to.be.true;
+  });
+
+  it('should return false if the value is undefined or null', () => {
+    expect(isSetNumber(null)).to.be.false;
+    expect(isSetNumber(undefined)).to.be.false;
+  });
+});
