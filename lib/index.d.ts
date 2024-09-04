@@ -7,7 +7,7 @@
  * isSet("some value"); returns true
  * @return {Boolean} - true if the value is set, false otherwise.
  */
-export declare const isSet: <T>(obj: T) => obj is Exclude<T, null | undefined | false | "false" | "null" | "[]" | "" | "undefined" | 0>;
+export declare const isSet: <T>(obj: T) => obj is Exclude<T, null | undefined | false | "null" | "[]" | "" | "undefined" | 0>;
 /**
  * Checks if an object is set and not empty.
  * @param {object} obj - The object to be checked.
