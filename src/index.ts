@@ -9,7 +9,7 @@ import { MONTH } from "./constants"
  * isSet("some value"); returns true
  * @return {Boolean} - true if the value is set, false otherwise.
  */
-export const isSet = (obj: any): boolean => {
+export const isSet = <T>(obj: T): obj is Exclude<T, null | undefined | false | "false" | "null" | "[]" | "" | "undefined" | 0> => {
     // check if the value is provided is any of the conditions.
     if (
         obj &&
